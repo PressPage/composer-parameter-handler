@@ -60,7 +60,12 @@ class Processor
             mkdir($dir, 0755, true);
         }
 
-        file_put_contents($realFile, "# This file is auto-generated during the composer install\n" . Yaml::dump($actualValues, 99));
+        if($parameterKey == 'laravel'){
+            file_put_contents($realFile, "# This file is auto-generated during the composer install\n" . Yaml::dump($actualValues['laravel'], 99));
+        }else{
+            file_put_contents($realFile, "# This file is auto-generated during the composer install\n" . Yaml::dump($actualValues, 99));
+        }
+
     }
 
     private function processConfig(array $config)
