@@ -51,7 +51,12 @@ class Processor
             if (!is_array($existingValues)) {
                 throw new \InvalidArgumentException(sprintf('The existing "%s" file does not contain an array', $realFile));
             }
-            $actualValues = array_merge($actualValues, $existingValues);
+            if($parameterKey == 'laravel'){
+                $actualValues = array_merge($actualValues, ['laravel' => $existingValues]);
+            }else{
+                $actualValues = array_merge($actualValues, $existingValues);
+            }
+
         }
 
         $actualValues[$parameterKey] = $this->processParams($config, $expectedParams, (array) $actualValues[$parameterKey]);
