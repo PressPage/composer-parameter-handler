@@ -66,7 +66,9 @@ class Processor
         }
 
         if($parameterKey == 'laravel'){
-            file_put_contents($realFile, "# This file is auto-generated during the composer install\n" . Yaml::dump($actualValues['laravel'], 99));
+            $envVariables = Yaml::dump($actualValues['laravel'], 99);
+            $envVariables = preg_replace('/:\s/','=',$envVariables);
+            file_put_contents($realFile, "# This file is auto-generated during the composer install\n" .$envVariables );
         }else{
             file_put_contents($realFile, "# This file is auto-generated during the composer install\n" . Yaml::dump($actualValues, 99));
         }
