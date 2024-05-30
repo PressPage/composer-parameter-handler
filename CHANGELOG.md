@@ -1,3 +1,7 @@
+## 2.2.1 (2024-05-30)
+
+* Bring back support for Symfony 2.3+ and 3.0+ since the code didn't change and it makes upgrading to this version easier
+
 ## 2.2.0 (2023-12-09)
 
 * Drop support for old PHP versions. The min version is now PGP 7.4.
