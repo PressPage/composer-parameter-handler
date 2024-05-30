@@ -2,22 +2,38 @@
 
 namespace Incenteev\ParameterHandler\Tests;
 
+use Composer\IO\IOInterface;
+use Composer\Package\RootPackageInterface;
+use Composer\Script\Event;
 use Incenteev\ParameterHandler\ScriptHandler;
-use Prophecy\PhpUnit\ProphecyTestCase;
+use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 
-class ScriptHandlerTest extends ProphecyTestCase
+class ScriptHandlerTest extends TestCase
 {
+    use ProphecyTrait;
+
+    /**
+     * @var ObjectProphecy<Event>
+     */
     private $event;
+    /**
+     * @var ObjectProphecy<IOInterface>
+     */
     private $io;
+    /**
+     * @var ObjectProphecy<RootPackageInterface>
+     */
     private $package;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->event = $this->prophesize('Composer\Script\Event');
         $this->io = $this->prophesize('Composer\IO\IOInterface');
-        $this->package = $this->prophesize('Composer\Package\PackageInterface');
+        $this->package = $this->prophesize(RootPackageInterface::class);
         $composer = $this->prophesize('Composer\Composer');
 
         $composer->getPackage()->willReturn($this->package);
@@ -34,7 +50,8 @@ class ScriptHandlerTest extends ProphecyTestCase
 
         chdir(__DIR__);
 
-        $this->setExpectedException('InvalidArgumentException', $exceptionMessage);
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage($exceptionMessage);
 
         ScriptHandler::buildParameters($this->event->reveal());
     }

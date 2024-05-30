@@ -2,13 +2,21 @@
 
 namespace Incenteev\ParameterHandler\Tests;
 
+use Composer\IO\IOInterface;
 use Incenteev\ParameterHandler\Processor;
-use Prophecy\PhpUnit\ProphecyTestCase;
+use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 
-class ProcessorTest extends ProphecyTestCase
+class ProcessorTest extends TestCase
 {
+    use ProphecyTrait;
+
+    /**
+     * @var ObjectProphecy<IOInterface>
+     */
     private $io;
     private $environmentBackup = array();
 
@@ -17,7 +25,7 @@ class ProcessorTest extends ProphecyTestCase
      */
     private $processor;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -25,7 +33,7 @@ class ProcessorTest extends ProphecyTestCase
         $this->processor = new Processor($this->io->reveal());
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 
@@ -45,7 +53,8 @@ class ProcessorTest extends ProphecyTestCase
     {
         chdir(__DIR__);
 
-        $this->setExpectedException('InvalidArgumentException', $exceptionMessage);
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage($exceptionMessage);
 
         $this->processor->processFile($config);
     }

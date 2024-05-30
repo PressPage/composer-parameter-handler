@@ -1,3 +1,25 @@
+## 2.2.1 (2024-05-30)
+
+* Bring back support for Symfony 2.3+ and 3.0+ since the code didn't change and it makes upgrading to this version easier
+
+## 2.2.0 (2023-12-09)
+
+* Drop support for old PHP versions. The min version is now PGP 7.4.
+* Drop support for old Symfony versions. The min version is now Symfony 5.4
+* Mark symfony/yaml 7 as supported
+
+## 2.1.5 (2022-05-25)
+
+* Mark symfony/yaml 6 as supported
+
+## 2.1.4 (2020-03-17)
+
+* Mark symfony/yaml 5 as supported
+
+## 2.1.3 (2018-02-13)
+
+* Mark symfony/yaml 4 as supported to be compatible with Symfony 4
+
 ## 2.1.2 (2015-11-10)
 
 * Mark symfony/yaml 3 as supported to be compatible with Symfony 3
